@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <script>
+    function count(i) {
+      const counter = document.getElementById("counter");
+      counter.innerText = i;
+
+      if (i == 0) {
+        counter.style.color = "red";
+      }
+    }
+    </script>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        min-height:100vh;
+        text-align: center;
+        margin: 0;
+      }
+      .text {
+        color: brown;
+      }
+      #counter {
+        color: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="text">It's mobious time!</div>
+    <div id="counter">&nbsp;</div>
+  </body>
+  <script>
+    let i = 10;
+    // Set interval to start counter every 1 second
+    let countInterval = setInterval(function() {
+      if (i == 0) {
+        count(i);
+        // Clean interval to stop the counter
+        clearInterval(countInterval);
+      } else {
+        count(i);
+        i = i - 1;
+      }
+    }, 1000);
+  </script>
+</html>
