@@ -3,20 +3,23 @@
     <title>Timer</title>
     <!-- put the script of functions in the head -->
     <script>
+      const NUMBER_START = 10;
+      const NUMBER_END = 0;
+
       function showNumber(i) {
         const timer = document.getElementById("timer");
         timer.innerText = i;
 
-        if (i == 0) {
+        if (i == NUMBER_END) {
           timer.style.color = "red";
         }
       }
 
       function countDown() {
-        let i = 10;
+        let i = NUMBER_START;
         // set interval to start counter every 1 second
         const countInterval = setInterval(function() {
-          if (i == 0) {
+          if (i == NUMBER_END) {
             showNumber(i);
             // clean interval to stop the counter
             clearInterval(countInterval);
@@ -49,7 +52,7 @@
   </head>
   <body>
     <div class="text">It's morbius time!</div>
-    <!-- set the initial value to be &nbsp, otherwise the position will be changed a bit for the "It's morbius time!" -->
+    <!-- set the initial value to be &nbsp as a placeholder, otherwise the position of other elements will be impacted -->
     <div id="timer">&nbsp;</div>
     <!-- put the script, which will run, at the end of the body -->
     <script>
