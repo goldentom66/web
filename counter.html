@@ -1,13 +1,14 @@
 <html>
   <head>
+    <title>Timer</title>
     <!-- put the script of functions in the head -->
     <script>
-      function count(j) {
-        const counter = document.getElementById("counter");
-        counter.innerText = j;
+      function showNumber(i) {
+        const timer = document.getElementById("timer");
+        timer.innerText = i;
 
-        if (j == 0) {
-          counter.style.color = "red";
+        if (i == 0) {
+          timer.style.color = "red";
         }
       }
 
@@ -16,12 +17,12 @@
         // set interval to start counter every 1 second
         const countInterval = setInterval(function() {
           if (i == 0) {
-            count(i);
+            showNumber(i);
             // clean interval to stop the counter
             clearInterval(countInterval);
           } else {
-            count(i);
-            i = i - 1;
+            showNumber(i);
+            i--;
           }
         }, 1000);
       }
@@ -49,7 +50,7 @@
   <body>
     <div class="text">It's morbius time!</div>
     <!-- set the initial value to be &nbsp, otherwise the position will be changed a bit for the "It's morbius time!" -->
-    <div id="counter">&nbsp;</div>
+    <div id="timer">&nbsp;</div>
     <!-- put the script, which will run, at the end of the body -->
     <script>
       countDown();
