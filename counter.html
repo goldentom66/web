@@ -1,25 +1,42 @@
 <html>
   <head>
+    <!-- put the script of functions in the head -->
     <script>
-    function count(i) {
-      const counter = document.getElementById("counter");
-      counter.innerText = i;
+      function count(j) {
+        const counter = document.getElementById("counter");
+        counter.innerText = j;
 
-      if (i == 0) {
-        counter.style.color = "red";
+        if (j == 0) {
+          counter.style.color = "red";
+        }
       }
-    }
+
+      function countDown() {
+        let i = 10000;
+        // set interval to start counter every 1 second
+        const countInterval = setInterval(function() {
+          if (i == 0) {
+            count(i);
+            // clean interval to stop the counter
+            clearInterval(countInterval);
+          } else {
+            count(i);
+            i = i - 1;
+          }
+        }, 1000);
+      }
     </script>
     <style>
       /* you can try select / deselect the styles from chrome Inspect > Elements */
       body {
         margin: 0;
+        height: 100%;
+
         text-align: center;
 
         display: flex;
         flex-direction: column;
         justify-content: center;
-        min-height: 100vh;
       }
       .text {
         color: brown;
@@ -33,19 +50,9 @@
     <div class="text">It's morbius time!</div>
     <!-- set the initial value to be &nbsp, otherwise the position will be changed a bit for the "It's morbius time!" -->
     <div id="counter">&nbsp;</div>
+    <!-- put the script, which will run, at the end of the body -->
+    <script>
+      countDown();
+    </script>
   </body>
-  <script>
-    let i = 10;
-    // set interval to start counter every 1 second
-    let countInterval = setInterval(function() {
-      if (i == 0) {
-        count(i);
-        // clean interval to stop the counter
-        clearInterval(countInterval);
-      } else {
-        count(i);
-        i = i - 1;
-      }
-    }, 1000);
-  </script>
 </html>
