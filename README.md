@@ -1,1 +1,1 @@
-# web
+# Sample files for web applicaiton
