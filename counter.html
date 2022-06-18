@@ -11,6 +11,7 @@
     }
     </script>
     <style>
+      /* you can try select / deselect it from chrome Inspect > Elements */
       body {
         margin: 0;
         text-align: center;
@@ -30,15 +31,16 @@
   </head>
   <body>
     <div class="text">It's morbius time!</div>
+    <!-- set the initial value to be &nbsp, otherwise the position will be changed a bit for the "It's morbius time!" -->
     <div id="counter">&nbsp;</div>
   </body>
   <script>
     let i = 10;
-    // Set interval to start counter every 1 second
+    // set interval to start counter every 1 second
     let countInterval = setInterval(function() {
       if (i == 0) {
         count(i);
-        // Clean interval to stop the counter
+        // clean interval to stop the counter
         clearInterval(countInterval);
       } else {
         count(i);
