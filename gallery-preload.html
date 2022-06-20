@@ -66,12 +66,20 @@
       body {
         margin: 0;
         height: 100%;
+        width: 100%;
 
         text-align: center;
+      }
 
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
+      #app-root {
+        display: inline-block;
+        vertical-align: middle;
+      }
+
+      .vertical-align-helper {
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
       }
       
       button {
@@ -85,13 +93,6 @@
 
       #image-container {
         display: inline-block;
-      }
-
-      #image-container::before {
-        content: '';
-        display: inline-block;
-        height: 100%;
-        vertical-align: middle;
       }
 
       .image {
@@ -129,18 +130,23 @@
     </style>
   </head>
   <body>
-    <div class="row">
-      <div class="col">
-        <button id="left-button" onclick="decreasePage()">&lt;</button>
+    <div class="vertical-align-helper"></div>
+    <div id="app-root">
+      <div class="row">
+        <div class="col">
+          <button id="left-button" onclick="decreasePage()">&lt;</button>
+        </div>
+        <div class="col main">
+          <div class="vertical-align-helper"></div>
+          <div id="image-container"></div>
+        </div>
+        <div class="col">
+          <button id="right-button" onclick="increasePage()">&gt;</button>
+        </div>
       </div>
-      <div class="col main">
-        <div id="image-container"></div>
-      </div>
-      <div class="col">
-        <button id="right-button" onclick="increasePage()">&gt;</button>
-      </div>
+      <div class="row" id="indicator-container"></div>
     </div>
-    <div class="row" id="indicator-container"></div>
+    
     <script>
       const images = [
         'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
