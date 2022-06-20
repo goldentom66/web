@@ -1,0 +1,156 @@
+<html>
+  <head>
+    <script>
+      function updateCurrent(child, i, page) {
+        if (page == i) {
+          if (!child.classList.contains("current")) {
+            child.classList.add("current")
+          }
+        } else {
+          if (child.classList.contains("current")) {
+            child.classList.remove("current")
+          }
+        }
+      }
+
+      function updateImage(page) {
+        for (let i = 0; i < images.length; i++) {
+          const child = document.getElementById('image-container').children[i];
+          updateCurrent(child, i, page);
+        }
+      }
+
+      function updateIndicator(page) {
+        for (let i = 0; i < images.length; i++) {
+          const child = document.getElementById('indicator-container').children[i];
+          updateCurrent(child, i, page);
+        }
+      }
+
+      function updatePaginator(page) {
+        if (page <= 0) {
+          document.getElementById('left-button').disabled = true;
+        } else {
+          document.getElementById('left-button').disabled = false;
+        }
+
+        if (page >= images.length - 1) {
+          document.getElementById('right-button').disabled = true;
+        } else {
+          document.getElementById('right-button').disabled = false;
+        }
+      }
+
+      function updatePage(page) {
+        updatePaginator(page);
+        updateIndicator(page);
+        updateImage(page);
+      }
+
+      function decreasePage() {
+        page--;
+        updatePage(page);
+      }
+
+      function increasePage() {
+        page++;
+        updatePage(page);
+      }
+
+      function gotoPage(i) {
+        page = i;
+        updatePage(page);
+      }
+    </script>
+    <style>
+      button {
+        cursor: pointer;
+      }
+
+      .main {
+        height: 500px;
+        width: 800px;
+      }
+
+      #image-container {
+        display: inline-block;
+      }
+
+      .image {
+        display: none;
+        max-width: 700px;
+        max-height: 500px;
+        vertical-align: middle;
+      }
+
+      .image.current {
+        display: inline-block;
+      }
+
+      .vertical-align-helper {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+      }
+
+      .indicator {
+        height: 15px;
+        width: 15px;
+        border: 1px solid;
+        border-radius: 50%;
+        border-color: black;
+        cursor: pointer;
+        margin: 15px;
+      }
+
+      .indicator.current {
+        border-color: red;
+      }
+
+      .row {
+        text-align: center;
+      }
+
+      .col {
+        display: inline-block;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="row image-row">
+      <div class="col left">
+        <button id="left-button" onclick="decreasePage()">&lt;</button>
+      </div>
+      <div class="col main">
+        <div class="vertical-align-helper"></div>
+        <div id="image-container"></div>
+      </div>
+      <div class="col right">
+        <button id="right-button" onclick="increasePage()">&gt;</button>
+      </div>
+    </div>
+    <div class="row" id="indicator-container"></div>
+    <script>
+      const images = [
+        'https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885__480.jpg',
+        'https://love-shayari.co/wp-content/uploads/2021/10/sun-rise.jpg',
+        'https://cdn.eso.org/images/thumb700x/eso1740a.jpg',
+        'https://hindutrend.com/wp-content/uploads/2020/01/beautiful-good-night-images-for-lover.jpg'
+      ];
+
+      let indicatorHtml = '';
+      let imageHtml = '';
+      for (let i = 0; i < images.length; i++) {
+        indicatorHtml += '<div class="col indicator" onclick="gotoPage(' + i + ')"></div>';
+        imageHtml += '<img class="image" src="' + images[i] + '"></img>';
+      }
+
+      document.getElementById('indicator-container').innerHTML = indicatorHtml;
+      document.getElementById('image-container').innerHTML = imageHtml;
+
+      let page = 0;
+      updatePage(page);
+    </script>
+  </body>
+</html>
