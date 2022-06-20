@@ -1,23 +1,29 @@
 <html>
   <head>
     <script>
+      function updateCurrent(child, i, page) {
+        if (page == i) {
+          if (!child.classList.contains("current")) {
+            child.classList.add("current")
+          }
+        } else {
+          if (child.classList.contains("current")) {
+            child.classList.remove("current")
+          }
+        }
+      }
+
       function updateImage(page) {
-        const image = document.getElementById('image');
-        image.src = images[page];
+        for (let i = 0; i < images.length; i++) {
+          const child = document.getElementById('image-container').children[i];
+          updateCurrent(child, i, page);
+        }
       }
 
       function updateIndicator(page) {
         for (let i = 0; i < images.length; i++) {
           const child = document.getElementById('indicator-container').children[i];
-          if (page == i) {
-            if (!child.classList.contains("current")) {
-              child.classList.add("current")
-            }
-          } else {
-            if (child.classList.contains("current")) {
-              child.classList.remove("current")
-            }
-          }
+          updateCurrent(child, i, page);
         }
       }
 
@@ -77,18 +83,26 @@
         width: 800px;
       }
 
-      .main img {
-        max-width: 700px;
-        max-height: 500px;
-        vertical-align: middle;
+      #image-container {
         display: inline-block;
       }
 
-      .vertical-align-helper {
+      #image-container::before {
         content: '';
         display: inline-block;
         height: 100%;
         vertical-align: middle;
+      }
+
+      .image {
+        display: none;
+        max-width: 700px;
+        max-height: 500px;
+        vertical-align: middle;
+      }
+
+      .image.current {
+        display: inline-block;
       }
 
       .indicator {
@@ -115,15 +129,14 @@
     </style>
   </head>
   <body>
-    <div class="row image-row">
-      <div class="col left">
+    <div class="row">
+      <div class="col">
         <button id="left-button" onclick="decreasePage()">&lt;</button>
       </div>
       <div class="col main">
-        <div class="vertical-align-helper"></div>
-        <img id="image" src=""></img>
+        <div id="image-container"></div>
       </div>
-      <div class="col right">
+      <div class="col">
         <button id="right-button" onclick="increasePage()">&gt;</button>
       </div>
     </div>
@@ -137,11 +150,14 @@
       ];
 
       let indicatorHtml = '';
+      let imageHtml = '';
       for (let i = 0; i < images.length; i++) {
         indicatorHtml += '<div class="col indicator" onclick="gotoPage(' + i + ')"></div>';
+        imageHtml += '<img class="image" src="' + images[i] + '"></img>';
       }
 
       document.getElementById('indicator-container').innerHTML = indicatorHtml;
+      document.getElementById('image-container').innerHTML = imageHtml;
 
       let page = 0;
       updatePage(page);
