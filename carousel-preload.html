@@ -76,6 +76,13 @@
         display: inline-block;
       }
 
+      #image-container::before {
+        content: '';
+        display: inline-block;
+        height: 100%;
+        vertical-align: middle;
+      }
+
       .image {
         display: none;
         max-width: 700px;
@@ -85,13 +92,6 @@
 
       .image.current {
         display: inline-block;
-      }
-
-      .vertical-align-helper {
-        content: '';
-        display: inline-block;
-        height: 100%;
-        vertical-align: middle;
       }
 
       .indicator {
@@ -123,7 +123,6 @@
         <button id="left-button" onclick="decreasePage()">&lt;</button>
       </div>
       <div class="col main">
-        <div class="vertical-align-helper"></div>
         <div id="image-container"></div>
       </div>
       <div class="col right">
